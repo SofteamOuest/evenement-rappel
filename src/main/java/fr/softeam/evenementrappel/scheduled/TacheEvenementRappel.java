@@ -32,7 +32,7 @@ public class TacheEvenementRappel {
         this.apiPersonneAdapter = apiPersonneAdapter;
     }
 
-    //@Scheduled(cron="")
+    @Scheduled(cron="0 7 * * * *")
     public void sendRappel() throws EvenementRappelException {
         List<EvenementRappel> evenementRappelList = evenementParcoursIntegrationAdapter.getEvenementsARappeler();
         for (EvenementRappel evenementRappel: evenementRappelList
