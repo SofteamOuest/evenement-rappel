@@ -46,7 +46,7 @@
     </dependencies>
 
 	<build>
-		<finalName>gestion-rappel</finalName>
+		<finalName>evenement-rappel</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
