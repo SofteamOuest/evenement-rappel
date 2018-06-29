@@ -23,7 +23,7 @@ Il que les services suivant tournent pour que celui ci marche :
 
 ## Reste à faire
 
-Il faut envoyer les mails personnes concernées par l'événement.
+Il faut envoyer les mails aux personnes concernées par l'événement.
 
 
 
