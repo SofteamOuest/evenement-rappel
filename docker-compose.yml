@@ -4,5 +4,4 @@ services:
   evenement-rappel:
     build:
       context: .
-      dockerfile: Dockerfile-back
 
