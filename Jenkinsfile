@@ -45,7 +45,7 @@ podTemplate(label: 'meltingpoc-evenement-rappel-pod', nodeSelector: 'medium', co
 
                 stage('build sources'){
 
-                    sh 'mvn clean install'
+                    sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://sonarqube-sonarqube:9000 -Dsonar.java.binaries=target -DskipTests'
 
                 }
         }
