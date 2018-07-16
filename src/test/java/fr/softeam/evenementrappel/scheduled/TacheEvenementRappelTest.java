@@ -2,6 +2,8 @@ package fr.softeam.evenementrappel.scheduled;
 
 import fr.softeam.evenementrappel.dto.EvenementGenerique;
 import fr.softeam.evenementrappel.dto.EvenementRappel;
+import fr.softeam.evenementrappel.dto.Personne;
+import fr.softeam.evenementrappel.exception.AppelPersonneApiException;
 import fr.softeam.evenementrappel.exception.EvenementRappelException;
 import fr.softeam.evenementrappel.service.ApiGroupePersonneAdapter;
 import fr.softeam.evenementrappel.service.ApiPersonneAdapter;
@@ -34,11 +36,12 @@ public class TacheEvenementRappelTest {
     private TacheEvenementRappel tacheEvenementRappel;
 
     @Test
-    public void given_liste_2_evenement_a_rappeler_when_envoi_des_mails_then_envoi_2_mail_formater() throws EvenementRappelException {
+    public void given_liste_2_evenement_a_rappeler_when_envoi_des_mails_then_envoi_2_mail_formater() throws EvenementRappelException, AppelPersonneApiException {
         List<String> emails = new ArrayList<>();
+        Personne personne = new Personne();
         emails.add("test@test.com");
         Mockito.when(apiGroupePersonneAdapter.getEmailByGroupe(Mockito.any())).thenReturn(emails);
-        Mockito.when(apiPersonneAdapter.getNomPrenomParId(Mockito.any())).thenReturn("Mr Power");
+        Mockito.when(apiPersonneAdapter.getPersonneParId(Mockito.any())).thenReturn(personne);
         Mockito.when(evenementParcoursIntegrationAdapter.getEvenementsARappeler()).thenReturn(getListeEvenementRappelDummy());
 
     }

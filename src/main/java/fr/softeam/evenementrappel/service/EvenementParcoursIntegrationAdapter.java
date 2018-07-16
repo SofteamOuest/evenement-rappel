@@ -1,16 +1,20 @@
 package fr.softeam.evenementrappel.service;
 
-import fr.softeam.evenementrappel.dto.EvenementGenerique;
-import fr.softeam.evenementrappel.dto.EvenementRappel;
-import fr.softeam.evenementrappel.exception.EvenementRappelException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
+import fr.softeam.evenementrappel.dto.EvenementRappel;
+import fr.softeam.evenementrappel.exception.EvenementRappelException;
 
 @Service
 public class EvenementParcoursIntegrationAdapter {
@@ -29,7 +33,7 @@ public class EvenementParcoursIntegrationAdapter {
     public List<EvenementRappel> getEvenementsARappeler() throws EvenementRappelException{
         try{
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
             HttpEntity<?> entity = new HttpEntity<>("", headers);
             ResponseEntity<List<EvenementRappel>> responseEntity =
                     restTemplate.exchange(evenementParcoursIntegration+rappelEvenement,
@@ -37,6 +41,8 @@ public class EvenementParcoursIntegrationAdapter {
                             entity,
                             new ParameterizedTypeReference<List<EvenementRappel>>(){});
             return responseEntity.getBody();
+        	
+          
         }catch(HttpClientErrorException  exception){
             throw new EvenementRappelException(exception.getResponseBodyAsString());
         }
