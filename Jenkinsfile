@@ -53,9 +53,6 @@ podTemplate(label: 'meltingpoc-evenement-rappel-pod', nodeSelector: 'medium', co
 
                 stage('build docker image'){
 
-
-                    sh "docker build -t registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-gestion-rappel:$now ."
-
                     sh 'mkdir /etc/docker'
 
                     // le registry est insecure (pas de https)
@@ -66,8 +63,9 @@ podTemplate(label: 'meltingpoc-evenement-rappel-pod', nodeSelector: 'medium', co
                          sh "docker login -u admin -p ${NEXUS_PWD} registry.k8.wildwidewest.xyz"
                     }
 
-                    sh "docker push registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-gestion-rappel:$now"
+                    sh "tag=$now docker-compose build"
 
+                    sh "tag=$now docker-compose push"
                 }
         }
 

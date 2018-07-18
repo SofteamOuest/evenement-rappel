@@ -2,6 +2,7 @@ version: '3.2'
 services:
 
   evenement-rappel:
+    image: "registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-gestion-rappel:${tag}"
     build:
       context: .
 
