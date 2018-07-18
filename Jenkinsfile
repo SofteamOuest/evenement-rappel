@@ -38,7 +38,7 @@ podTemplate(label: 'meltingpoc-evenement-rappel-pod', nodeSelector: 'medium', co
         def now = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
 
         stage('checkout sources') {
-            checkout scm;
+            checkout scm
         }
 
         container('maven') {
@@ -75,9 +75,8 @@ podTemplate(label: 'meltingpoc-evenement-rappel-pod', nodeSelector: 'medium', co
 
                 build job: "/SofteamOuest/chart-run/master",
                         wait: false,
-                        parameters: [[$class: 'StringParameterValue', name: 'image', value: "$now",
-                                $class: 'StringParameterValue', name: 'chart', value: "evenement-rappel"]]
-
+                        parameters: [string(name: 'image', value: "$now"),
+                            string(name: 'chart', value: "evenement-rappel")]
             }
         }
     }
