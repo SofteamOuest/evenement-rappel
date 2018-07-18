@@ -26,18 +26,18 @@ podTemplate(label: 'meltingpoc-evenement-rappel-pod', nodeSelector: 'medium', co
 
         properties([
                 buildDiscarder(
-                    logRotator(
-                        artifactDaysToKeepStr: '1',
-                        artifactNumToKeepStr: '1',
-                        daysToKeepStr: '3',
-                        numToKeepStr: '3'
-                    )
+                        logRotator(
+                                artifactDaysToKeepStr: '1',
+                                artifactNumToKeepStr: '1',
+                                daysToKeepStr: '3',
+                                numToKeepStr: '3'
+                        )
                 )
-            ])
+        ])
 
         def now = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
 
-        stage('checkout sources'){
+        stage('checkout sources') {
             checkout scm;
         }
 
@@ -46,7 +46,6 @@ podTemplate(label: 'meltingpoc-evenement-rappel-pod', nodeSelector: 'medium', co
                 stage('build sources'){
 
                     sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://sonarqube-sonarqube:9000 -Dsonar.java.binaries=target -DskipTests'
-
                 }
         }
 
@@ -74,12 +73,12 @@ podTemplate(label: 'meltingpoc-evenement-rappel-pod', nodeSelector: 'medium', co
 
         container('kubectl') {
 
-            stage('deploy'){
+            stage('deploy') {
 
-
-                build job: "/SofteamOuest/evenement-rappel-run/master",
-                  wait: false,
-                  parameters: [[$class: 'StringParameterValue', name: 'image', value: "$now"]]
+                build job: "/SofteamOuest/chart-run/master",
+                        wait: false,
+                        parameters: [[$class: 'StringParameterValue', name: 'image', value: "$now",
+                                $class: 'StringParameterValue', name: 'chart', value: "evenement-rappel"]]
 
             }
         }
