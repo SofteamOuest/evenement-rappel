@@ -17,7 +17,7 @@ import fr.softeam.evenementrappel.exception.AppelPersonneApiException;
 public class ApiPersonneAdapter {
 
     private RestTemplate restTemplate;
-    @Value("${PERSONNE_API_URI}")
+    @Value("${personne_api_uri}")
     private String PERSONNE_API_URI;
 
     public ApiPersonneAdapter(RestTemplate restTemplate){

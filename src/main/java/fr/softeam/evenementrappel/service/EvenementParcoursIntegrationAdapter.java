@@ -20,7 +20,7 @@ import fr.softeam.evenementrappel.exception.EvenementRappelException;
 public class EvenementParcoursIntegrationAdapter {
     private RestTemplate restTemplate;
 
-    @Value("${evenement.parcours.integration}")
+    @Value("${evenement_parcours_integration}")
     private String evenementParcoursIntegration;
 
     @Value("${rappel.evenement}")
